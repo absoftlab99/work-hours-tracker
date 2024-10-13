@@ -65,6 +65,7 @@
                 <button id="exportCSV" class="bg-green-600 text-white px-4 py-2 rounded"><i class="ti ti-file-type-csv"></i> Export CSV</button>
                 <button id="exportImage" class="bg-purple-600 text-white px-4 py-2 rounded"><i class="ti ti-photo-down"></i> Export Image</button>
                 <button id="submitReportButton" class="bg-blue-700 text-white px-4 py-2 rounded"><i class="ti ti-send"></i> Submit Report</button>
+                <a href="/clock/view_reports.php" id="" class="bg-pink-700 text-white px-4 py-2 rounded"><i class="ti ti-eye-check"></i> View Reports</a>
             </div>
         </div>
     </div>

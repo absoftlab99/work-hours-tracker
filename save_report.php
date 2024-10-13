@@ -6,10 +6,10 @@ header("Access-Control-Allow-Headers: Content-Type");
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "time_tracker";
+$servername = getenv('DB_SERVER') ?: "localhost";
+$username = getenv('DB_USERNAME') ?: "root";
+$password = getenv('DB_PASSWORD') ?: "";
+$dbname = getenv('DB_NAME') ?: "time_tracker";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
