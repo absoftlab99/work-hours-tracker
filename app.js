@@ -58,8 +58,27 @@ function stopWork() {
 
     calculateTotalTimes();
     generateReport();
-    saveReportToDatabase();
+
+    // Prepare the report data
+    const reportData = {
+        startTime: workIntervals[workIntervals.length - 1].start, // Get the last session's start time
+        endTime: endTime, // Get the end time of the last session
+        workSessions: workIntervals.map(interval => ({
+            start: interval.start,
+            end: interval.end || new Date() // Use current time if end is not set
+        })),
+        breakSessions: breakIntervals.map(interval => ({
+            start: interval.start,
+            end: interval.end
+        })),
+        totalWorkTime: totalWorkTime, // Use the calculated total work time
+        totalBreakTime: totalBreakTime // Use the calculated total break time
+    };
+
+    // Send the report data to the database
+    sendReportData(reportData);
 }
+
 
 function updateTimer() {
     const now = new Date();
@@ -104,7 +123,7 @@ function generateReport() {
     workIntervals.forEach((session, index) => {
         const workRow = document.createElement('tr');
         workRow.innerHTML = `<td class="border border-gray-300 px-4 py-2">Session-${index + 1}</td>
-                             <td class="border border-gray-300 px-4 py-2 font-bold">Start: ${formatTimeString(session.start)}, End: ${formatTimeString(session.end)}</td>`;
+                             <td class="border border-gray-300 px-4 py-2 flex gap-2">Start: <p class="font-bold">${formatTimeString(session.start)}</p>, End: <p class="font-bold">${formatTimeString(session.end)}</p></td>`;
         document.getElementById('workSessionContainer').appendChild(workRow);
     });
 
@@ -112,7 +131,7 @@ function generateReport() {
     breakIntervals.forEach((session, index) => {
         const breakRow = document.createElement('tr');
         breakRow.innerHTML = `<td class="border border-gray-300 px-4 py-2">Session-${index + 1}</td>
-                             <td class="border border-gray-300 px-4 py-2 font-bold">Start: ${formatTimeString(session.start)}, End: ${formatTimeString(session.end)}</td>`;
+                             <td class="border border-gray-300 px-4 py-2 flex gap-2">Start: <p class="font-bold">${formatTimeString(session.start)}</p>, End: <p class="font-bold">${formatTimeString(session.end)}</p></td>`;
         document.getElementById('breakSessionContainer').appendChild(breakRow);
     });
     

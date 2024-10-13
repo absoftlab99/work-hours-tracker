@@ -16,6 +16,7 @@
 
 
     <script src="app.js" defer></script>
+    <script src="send_report.js" defer></script>
 </head>
 <body class="bg-gray-100 p-14 ubuntu-regular">
     <div id="full-container" class="max-w-4xl mx-auto bg-white p-10 rounded-lg shadow-lg">
@@ -63,6 +64,7 @@
             <div class="mt-4 flex justify-between">
                 <button id="exportCSV" class="bg-green-600 text-white px-4 py-2 rounded"><i class="ti ti-file-type-csv"></i> Export CSV</button>
                 <button id="exportImage" class="bg-purple-600 text-white px-4 py-2 rounded"><i class="ti ti-photo-down"></i> Export Image</button>
+                <button id="submitReportButton" class="bg-blue-700 text-white px-4 py-2 rounded"><i class="ti ti-send"></i> Submit Report</button>
             </div>
         </div>
     </div>

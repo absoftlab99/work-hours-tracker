@@ -1,4 +1,11 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Headers: Content-Type");
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -15,6 +22,9 @@ if ($conn->connect_error) {
 // Get the JSON data from POST request
 $data = json_decode(file_get_contents("php://input"), true);
 
+// Debugging: log the incoming data
+file_put_contents('php://stderr', print_r($data, TRUE));
+
 $startTime = $data['startTime'];
 $endTime = $data['endTime'];
 $workSessions = json_encode($data['workSessions']);
@@ -30,7 +40,7 @@ $sql = "INSERT INTO reports (start_time, end_time, work_sessions, break_sessions
 if ($conn->query($sql) === TRUE) {
     echo json_encode(["message" => "Report saved successfully"]);
 } else {
-    echo json_encode(["message" => "Error: " . $sql . "<br>" . $conn->error]);
+    echo json_encode(["message" => "Error: " . $conn->error]);
 }
 
 $conn->close();
